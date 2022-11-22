@@ -5,12 +5,15 @@ import {
   STORE_MY_BLOGS,
   GET_BLOG_COMMENTS,
   STORE_BLOG_COMMENTS,
+  GET_BLOG,
+  STORE_BLOG,
 } from "../actionType";
 
 const InitialState = {
   allBlogs: [],
   allBlogs_loaded: false,
-  comments :[]
+  comments :[],
+  blog:[]
 };
 
 export const blogReducer = (state = InitialState, action) => {
@@ -37,6 +40,17 @@ export const blogReducer = (state = InitialState, action) => {
         ...state,
         allBlogs: action.payload,
         allBlogs_loaded: false,
+      };
+      case GET_BLOG:
+      return {
+        ...state,
+        blog: action.payload,
+       
+      };
+    case STORE_BLOG:
+      return {
+        ...state,
+        blog: action.payload,
       };
       
 

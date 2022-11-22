@@ -47,7 +47,7 @@ export default function Signup() {
   return (
     <Form className="flex flex-col" onSubmitHandler={onSubmitHandler}>
       <Label HTMLfor="name">name</Label>
-      <Input
+      <Input required={true}
       className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
         name="name"
         onChangeHandler={(e) => {
@@ -56,7 +56,7 @@ export default function Signup() {
         type="text"
       />
       <Label>username</Label>
-      <Input
+      <Input required={true}
       className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
         name="username"
         onChangeHandler={(e) => {
@@ -65,7 +65,7 @@ export default function Signup() {
         type="text"
       />
       <Label>email</Label>
-      <Input
+      <Input required={true}
       className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
         name="email"
         onChangeHandler={(e) => {
@@ -74,7 +74,7 @@ export default function Signup() {
         type="email"
       />
       <Label>password</Label>
-      <Input
+      <Input required={true}
       className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
         name="password"
         onChangeHandler={(e) => {

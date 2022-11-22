@@ -38,7 +38,7 @@ export default function AddBlog() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(
-        { title: title, content: value, blog_img: contextData.blogImage,category:category, blogger_id: parseInt(sessionStorage.getItem("user-id")), likes: [], date_created: new Date() }
+        { title: title, content: value, blog_img: contextData.blogImage,category:category, blogger_id: parseInt(sessionStorage.getItem("user-id")), likes: [],username:sessionStorage.getItem("username"), date_created: new Date() }
       )
     })
     let data = await res.json();

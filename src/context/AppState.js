@@ -9,12 +9,11 @@ export default function AppState(props) {
 
   let [liked, setLiked] = useState(false);
 
-  let [showComment, setshowComment] = useState(false);
   //   let [user, setUser] = useState(true)
 
   return (
     <AppContext.Provider
-      value={{ myBlogs, setMyBlogs, allBlog, setAllBlogs, liked, setLiked,showComment,setshowComment }}
+      value={{ myBlogs, setMyBlogs, allBlog, setAllBlogs, liked, setLiked}}
     >
       {props.children}
     </AppContext.Provider>

@@ -6,3 +6,6 @@ export const STORE_MY_BLOGS="STORE_MY_BLOGS"
 
 export const GET_BLOG_COMMENTS = "GET_BLOG_COMMENTS"
 export const STORE_BLOG_COMMENTS = "STORE_BLOG_COMMENTS"
+
+export const GET_BLOG = "GET_BLOG"
+export const STORE_BLOG = "STORE_BLOG"

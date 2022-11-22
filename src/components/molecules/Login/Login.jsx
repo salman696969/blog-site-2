@@ -44,6 +44,8 @@ export default function Login() {
             contextData.setLoggedIn(true)
             sessionStorage.setItem("login",true)
             sessionStorage.setItem("user-id",data[0].id)
+            sessionStorage.setItem("username",data[0].username)
+            sessionStorage.setItem("email",data[0].email)
           navigate("/allBlogs")
 
         }

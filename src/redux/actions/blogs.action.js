@@ -5,6 +5,8 @@ import {
   STORE_MY_BLOGS,
   STORE_BLOG_COMMENTS,
   GET_BLOG_COMMENTS,
+  GET_BLOG,
+  STORE_BLOG,
 } from "../actionType";
 
 export const getAllBlogs = (id, userId) => async (dispatch) => {
@@ -14,7 +16,7 @@ export const getAllBlogs = (id, userId) => async (dispatch) => {
 
   let data = await response.json();
 
-  console.log(id);
+  // console.log(id);
   if (id === undefined) {
     id = "allBlogs";
   }
@@ -32,10 +34,10 @@ export const getAllBlogs = (id, userId) => async (dispatch) => {
       payload: data,
     });
   }
-  console.log(userId);
+  // console.log(userId);
   if (id === "myBlogs") {
     data = data.filter((blog) => {
-      console.log(blog.blogger_id);
+      // console.log(blog.blogger_id);
       return blog.blogger_id === parseInt(userId);
     });
     dispatch({
@@ -66,3 +68,18 @@ dispatch({
   payload:data
 })
 } 
+
+export const getBlog = (id) => async(dispatch)=>{
+  let api_url = `http://localhost:3000/blogs/${id}`
+  let response = await fetch(api_url)
+  let data = await response.json()
+  console.log(data)
+  dispatch({
+   type: GET_BLOG,
+   payload: data,
+ });
+ dispatch({
+   type:STORE_BLOG,
+   payload:data
+ })
+ } 

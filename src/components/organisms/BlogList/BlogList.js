@@ -10,10 +10,10 @@ export default function BlogList() {
   let { id } = useParams();
   let dispatch = useDispatch();
   let userId = sessionStorage.getItem("user-id");
-  console.log(id);
+  // console.log(id);
   useEffect(() => {
     dispatch(getAllBlogs(id, userId));
-  }, [id]);
+  },[id]);
 
   allBlogs?.sort(function (a, b) {
     let c = new Date(a.date);
@@ -23,7 +23,7 @@ export default function BlogList() {
   allBlogs.reverse();
 
   return (
-    <div className="relative">
+    <div className="relative font-serif">
         
          
       <div className="p-5 border">

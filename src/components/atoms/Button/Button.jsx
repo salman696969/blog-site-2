@@ -5,11 +5,11 @@ const Button = ({ onClickHandler, className, children, ariaLabel,disabled,bg,tex
     <StyledButton
     bg={bg}
     text={text}
-        disabled={disabled}
-        className={className}
-        type={type}
-        onClick={onClickHandler}
-        aria-label={ariaLabel}
+    disabled={disabled}
+    className={className}
+    type={type}
+    onClick={onClickHandler}
+    aria-label={ariaLabel}
     >{children}
     </StyledButton>
 );

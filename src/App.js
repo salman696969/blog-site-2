@@ -10,6 +10,7 @@ import BlogList from "./components/organisms/BlogList/BlogList";
 import AddBlog from "./components/organisms/AddBlog/AddBlog";
 import RequireAuth from "./utils/RequireAuth"
 import Navbar from "./components/organisms/Navbar/Navbar";
+import BlogPage from "./components/pages/BlogPage/BlogPage";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<HomePage />}></Route>
           <Route element={<RequireAuth />}>
             <Route path="/:id" element={<BlogList />} />
+            <Route path="/blog/:id" element={<BlogPage />} />
           </Route>
           {/* <Route path="/allBlogs" element={<BlogList />} /> */}
         
