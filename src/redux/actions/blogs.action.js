@@ -7,6 +7,8 @@ import {
   GET_BLOG_COMMENTS,
   GET_BLOG,
   STORE_BLOG,
+  GET_USERS,
+  STORE_USERS,
 } from "../actionType";
 
 export const getAllBlogs = (id, userId) => async (dispatch) => {
@@ -80,6 +82,21 @@ export const getBlog = (id) => async(dispatch)=>{
  });
  dispatch({
    type:STORE_BLOG,
+   payload:data
+ })
+ } 
+
+ export const getUsers = (id) => async(dispatch)=>{
+  let api_url = `http://localhost:3000/users`
+  let response = await fetch(api_url)
+  let data = await response.json()
+  console.log(data)
+  dispatch({
+   type: GET_USERS,
+   payload: data,
+ });
+ dispatch({
+   type:STORE_USERS,
    payload:data
  })
  } 

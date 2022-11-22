@@ -9,3 +9,6 @@ export const STORE_BLOG_COMMENTS = "STORE_BLOG_COMMENTS"
 
 export const GET_BLOG = "GET_BLOG"
 export const STORE_BLOG = "STORE_BLOG"
+
+export const GET_USERS = "GET_USERS"
+export const STORE_USERS = "STORE_USERS"

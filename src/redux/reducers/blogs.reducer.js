@@ -7,13 +7,16 @@ import {
   STORE_BLOG_COMMENTS,
   GET_BLOG,
   STORE_BLOG,
+  GET_USERS,
 } from "../actionType";
 
 const InitialState = {
   allBlogs: [],
   allBlogs_loaded: false,
-  comments :[],
-  blog:[]
+  comments: [],
+  blog: [],
+  users:[],
+  users_loaded:false
 };
 
 export const blogReducer = (state = InitialState, action) => {
@@ -41,37 +44,53 @@ export const blogReducer = (state = InitialState, action) => {
         allBlogs: action.payload,
         allBlogs_loaded: false,
       };
-      case GET_BLOG:
+    case GET_BLOG:
       return {
         ...state,
         blog: action.payload,
-       
       };
     case STORE_BLOG:
       return {
         ...state,
         blog: action.payload,
+        users_loaded: true
       };
-      
 
     default:
       return state;
   }
 };
 
-  export const commentsReducer = (state = InitialState, action) => {
-    switch (action.type) {
+export const commentsReducer = (state = InitialState, action) => {
+  switch (action.type) {
     case GET_BLOG_COMMENTS:
       return {
         ...state,
         comments: action.payload,
       };
-      case STORE_BLOG_COMMENTS:
+    case STORE_BLOG_COMMENTS:
       return {
         ...state,
         comments: action.payload,
       };
-      default:
+    default:
       return state;
-    }
   }
+};
+
+export const usersReducer = (state = InitialState, action) => {
+  switch (action.type) {
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case STORE_BLOG_COMMENTS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    default:
+      return state;
+  }
+};

@@ -6,14 +6,16 @@ import LikeButton from "../../atoms/LikeButton/LikeButton";
 
 import CommentSection from "../../organisms/CommentSection/CommentSection";
 
-import { getComments } from "../../../redux/actions/blogs.action";
+import { getComments, getUsers } from "../../../redux/actions/blogs.action";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import DeleteBlog from "../../organisms/DeleteBlog/DeleteBlog";
 
 export default function Blog({ blog }) {
   const { id } = useParams();
-  // console.log(id)
+  let { users, users_loaded } = useSelector((state) => state.users);
+  let [user, setUser] = useState({});
+
   const addLike = async (addLike) => {
     let res = await fetch(`http://localhost:3000/blogs/${blog.id}`, {
       method: "PATCH",
@@ -58,6 +60,21 @@ export default function Blog({ blog }) {
   let dispatch = useDispatch();
   let [showComment, setshowComment] = useState(false);
 
+  useEffect(() => {
+    dispatch(getUsers());
+    
+  }, [users_loaded]);
+
+  useEffect(() => {
+    users.length !== 0 &&
+      setUser(
+        users?.find((user) => {
+          return user?.id == blog?.blogger_id;
+        })
+      );
+      console.log(user);
+  },[users]);
+
   const Opencomment = () => {
     setshowComment(true);
     dispatch(getComments(blog.id));
@@ -80,7 +97,7 @@ export default function Blog({ blog }) {
     <div>
       <div className=" border my-4 border-black flex justify-between">
         <div className="w-3/4 min-h-40 m-3 flex flex-col">
-          <div className="border-b-2 border-black">{blog.username}</div>
+          <div className="border-b-2 border-black">{user?.name}</div>
           <div>
             <Link to={"/blog/" + blog.id}>
               <div className="text-3xl">{blog.title}</div>
