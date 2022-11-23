@@ -7,6 +7,7 @@ import useBase64 from '../../../utils/useBase64';
 import Img from '../../atoms/Img/Img';
 import ImageConverter from '../../ImageConverter';
 import ImageContext from '../../../context/ImageContext';
+import { useSelector } from 'react-redux';
 export default function AddBlog() {
 
 
@@ -15,7 +16,7 @@ export default function AddBlog() {
   const [featuredImage, setFeaturedImage] = useState()
   const [category, setCategory] = useState([])
   const contextData = useContext(ImageContext)
-
+  let {categories } = useSelector((state) => state.allBlogs);
   // const [newBlog,setNewBlog]=useState(
   //   {
   //     title:'',
@@ -105,9 +106,13 @@ export default function AddBlog() {
         console.log(category);
         
       }} name="categoy">
-        <option value="food">food</option>
+        <option>Select Your Category</option>
+        {categories?.map((category)=>{
+          return <option key={category} value={category}>{category}</option>
+        })}
+        {/* <option value="food">food</option>
         <option value="technology">technology</option>
-        <option value="nature">nature</option>
+        <option value="nature">nature</option> */}
       </select>
 <div>
   {

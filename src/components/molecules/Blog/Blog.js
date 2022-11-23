@@ -109,7 +109,7 @@ export default function Blog({ blog }) {
             <div>
               Category:
               {blog.category.map((cat) => (
-                <span key={cat}>{cat}</span>
+                <span className="mx-1" key={cat}>{cat}</span>
               ))}
             </div>
             <span className="flex mt-8">

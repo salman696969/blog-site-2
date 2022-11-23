@@ -9,6 +9,10 @@ import {
   STORE_BLOG,
   GET_USERS,
   STORE_USERS,
+  GET_CATEGORY,
+  STORE_CATEGORY,
+  GET_CATEGORY_BLOGS,
+  STORE_CATEGORY_BLOGS,
 } from "../actionType";
 
 export const getAllBlogs = (id, userId) => async (dispatch) => {
@@ -100,3 +104,35 @@ export const getBlog = (id) => async(dispatch)=>{
    payload:data
  })
  } 
+
+ export const getCategory = () => async(dispatch)=>{
+  let api_url = `http://localhost:3000/category`
+  let response = await fetch(api_url)
+  let data = await response.json()
+  console.log(data)
+  dispatch({
+   type: GET_CATEGORY,
+   payload: data,
+ });
+ dispatch({
+   type:STORE_CATEGORY,
+   payload:data
+ })
+ } 
+
+ export const getCategoryBlogs = (category) => async(dispatch)=>{
+  let api_url = `http://localhost:3000/blogs/?category_like=${category}`
+  let response = await fetch(api_url)
+  let data = await response.json()
+  console.log(data)
+  dispatch({
+   type: GET_CATEGORY_BLOGS,
+   payload: data,
+ });
+ dispatch({
+   type:STORE_CATEGORY_BLOGS,
+   payload:data
+ })
+ } 
+
+ 

@@ -8,6 +8,10 @@ import {
   GET_BLOG,
   STORE_BLOG,
   GET_USERS,
+  GET_CATEGORY,
+  STORE_CATEGORY,
+  GET_CATEGORY_BLOGS,
+  STORE_CATEGORY_BLOGS,
 } from "../actionType";
 
 const InitialState = {
@@ -15,8 +19,10 @@ const InitialState = {
   allBlogs_loaded: false,
   comments: [],
   blog: [],
-  users:[],
-  users_loaded:false
+  users: [],
+  users_loaded: false,
+  categories: [],
+  category_loaded: [],
 };
 
 export const blogReducer = (state = InitialState, action) => {
@@ -30,7 +36,7 @@ export const blogReducer = (state = InitialState, action) => {
       return {
         ...state,
         allBlogs: action.payload,
-        allBlogs_loaded: false,
+        allBlogs_loaded: true,
       };
     case GET_MY_BLOGS:
       return {
@@ -53,7 +59,28 @@ export const blogReducer = (state = InitialState, action) => {
       return {
         ...state,
         blog: action.payload,
-        users_loaded: true
+        users_loaded: true,
+      };
+    case GET_CATEGORY:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case STORE_CATEGORY:
+      return {
+        ...state,
+        categories: action.payload,
+        category_loaded: true,
+      };
+    case GET_CATEGORY_BLOGS:
+      return {
+        ...state,
+        allBlogs: action.payload,
+      };
+    case STORE_CATEGORY_BLOGS:
+      return {
+        ...state,
+        allBlogs: action.payload
       };
 
     default:
