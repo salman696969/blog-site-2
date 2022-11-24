@@ -28,7 +28,9 @@ const InitialState = {
   users_loaded: false,
   categories: [],
   category_loaded: [],
-  user:[]
+  user:[],
+  myBlogs:[],
+  myBlogs_loaded:false
 };
 
 export const blogReducer = (state = InitialState, action) => {
@@ -47,14 +49,14 @@ export const blogReducer = (state = InitialState, action) => {
     case GET_MY_BLOGS:
       return {
         ...state,
-        allBlogs: action.payload,
-        allBlogs_loaded: false,
+        myBlogs: action.payload,
+        myBlogs_loaded: false,
       };
     case STORE_MY_BLOGS:
       return {
         ...state,
-        allBlogs: action.payload,
-        allBlogs_loaded: false,
+        myBlogs: action.payload,
+        myBlogs_loaded: false,
       };
     case GET_BLOG:
       return {

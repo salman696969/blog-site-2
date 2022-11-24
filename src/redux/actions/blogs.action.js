@@ -35,6 +35,22 @@ export const getAllBlogs = (id, userId) => async (dispatch) => {
   });
 };
 
+export const getMyBlogs = (id) => async (dispatch) => {
+  let apiUrl = `http://localhost:3000/blogs?blogger_id=${id}`;
+
+  let response = await fetch(apiUrl);
+
+  let data = await response.json();
+  dispatch({
+    type: GET_MY_BLOGS,
+    payload: data,
+  });
+  dispatch({
+    type: STORE_MY_BLOGS,
+    payload: data,
+  });
+};
+
 export const getComments = (id) => async (dispatch) => {
   let api_url = `http://localhost:3000/blog_details/${id}`;
   let response = await fetch(api_url);

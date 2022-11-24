@@ -6,18 +6,23 @@ import {
   getAllBlogs,
   getCategory,
   getCategoryBlogs,
+  getMyBlogs,
   getSearchBlogs,
+  getUser,
 } from "../../../redux/actions/blogs.action";
 import Button from "../../atoms/Button";
 import Label from "../../atoms/Label/Label";
 import Input from "../../atoms/Input/Input";
 import Blog from "../../molecules/Blog/Blog";
 import AddBlog from "../AddBlog/AddBlog";
+import Img from "../../atoms/Img/Img";
 
 export default function BlogList() {
   let { allBlogs, allBlogs_loaded, categories } = useSelector(
     (state) => state.allBlogs
   );
+  let { myBlogs, myBlogs_loaded } = useSelector((state) => state.allBlogs);
+  let { user, user_loaded } = useSelector((state) => state.users);
   let { id } = useParams();
   let dispatch = useDispatch();
   let contextData = useContext(AppContext);
@@ -26,8 +31,10 @@ export default function BlogList() {
 
   useEffect(() => {
     dispatch(getAllBlogs(id, userId));
+    dispatch(getMyBlogs(userId));
     dispatch(getCategory());
-  }, [id, allBlogs_loaded]);
+    dispatch(getUser(userId));
+  }, [id, allBlogs_loaded, myBlogs_loaded]);
 
   useEffect(() => {
     dispatch(getAllBlogs(id, userId));
@@ -56,19 +63,25 @@ export default function BlogList() {
 
   return (
     <div className="relative font-serif flex">
-      <div className="p-5 border basis-2/3">
+      <div className="p-5 basis-2/3">
         {id !== "addBlog" ? (
-          allBlogs?.map((blog) => {
-            return <Blog blog={blog} key={blog.id} />;
-          })
+          id == "myBlogs" ? (
+            myBlogs?.map((blog) => {
+              return <Blog blog={blog} key={blog.id} />;
+            })
+          ) : (
+            allBlogs?.map((blog) => {
+              return <Blog blog={blog} key={blog.id} />;
+            })
+          )
         ) : (
           <AddBlog />
         )}
       </div>
-      {allBlogs.length == 0 && id!="addBlog" ? (
+      {allBlogs.length == 0 && id != "addBlog" ? (
         <div className="fixed top-40 left-20">No Blogs Available</div>
       ) : null}
-      {id == "allBlogs" || id == "myBlogs" || id == null ? (
+      {id == "allBlogs" || id == null ? (
         <div className="basis-1/3 ml-8 mt-7 h-10 flex flex-wrap justify-center items-center">
           <div className="fixed">
             <Label className="hidden" HTMLfor="search">
@@ -107,6 +120,14 @@ export default function BlogList() {
               );
             })}
           </div>
+        </div>
+      ) : null}
+      {id == "myBlogs" ? (
+        <div className="flex flex-col justify-center items-center basis-1/3">
+          <Img src={user?.avatarImg} width="" height="" className="w-60"/>
+          <div>Name:-{user?.name}</div>
+          <div>Email:-{user?.email}</div>
+          <div>Username:-{user?.username}</div>
         </div>
       ) : null}
     </div>

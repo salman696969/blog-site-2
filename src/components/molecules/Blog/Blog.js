@@ -92,10 +92,10 @@ export default function Blog({ blog }) {
       <div className=" border my-4 border-black flex justify-between">
         <div className="w-3/4 min-h-40 m-3 flex flex-col">
           <div className="border-b-2 border-black flex items-center">
-            <span className=" bg-green-100 rounded-full w-24 h-24 ">
+            <span className=" bg-green-100 rounded-full w-16 h-16 mr-3">
               <img
                 src={user?.avatarImg}
-                className="border rounded-full object-cover h-24"
+                className="border rounded-full object-cover h-16"
                 alt={user?.name}
               />
             </span>
@@ -182,8 +182,9 @@ export default function Blog({ blog }) {
           <Img
             src={blog.blog_img}
             alt={blog.title}
-            width="300px"
+            width="340px"
             height="300px"
+            className="h-72"
           />
         </div>
       </div>

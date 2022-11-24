@@ -111,6 +111,7 @@ export default function UserSettings() {
           type="file"
           onChange={convert}
         />
+        <Img src={avatar} height="100px" width="100px"/>
         <Label>password</Label>
         <Input
           required={true}
@@ -124,7 +125,7 @@ export default function UserSettings() {
         />
 
         <Button disabled={false} className="bg-black text-white my-3">
-          Signup
+          Update Blog
         </Button>
       </Form>
     </div>
