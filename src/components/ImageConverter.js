@@ -24,6 +24,7 @@ export default function ImageConverter() {
           console.log(reader.result);
           setImageURL(reader.result)
           contextData.setBlogImage(reader.result) //base64encoded string
+          // contextData.setAvatar(reader.result) //base64encoded string
         };
         reader.onerror = error => {
           console.log("Error: ", error);

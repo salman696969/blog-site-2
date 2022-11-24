@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Label({children,HTMLfor}) {
+export default function Label({children,HTMLfor,className}) {
   return (
-    <label htmlFor={HTMLfor}>{children}</label>
+    <label className={className} htmlFor={HTMLfor}>{children}</label>
   )
 }

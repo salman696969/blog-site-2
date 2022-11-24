@@ -24,8 +24,6 @@ export default function Blog({ blog }) {
       },
       body: JSON.stringify({ likes: addLike }),
     });
-    let data = await res.json();
-    console.log(data);
   };
   let arr;
   let [liked, setLiked] = useState(
@@ -36,8 +34,6 @@ export default function Blog({ blog }) {
   );
 
   const likeBlog = () => {
-    // console.log("clicked");
-
     if (liked) {
       setLiked(false);
       arr = blog.likes.filter((like) => {
@@ -62,7 +58,6 @@ export default function Blog({ blog }) {
 
   useEffect(() => {
     dispatch(getUsers());
-    
   }, [users_loaded]);
 
   useEffect(() => {
@@ -72,8 +67,7 @@ export default function Blog({ blog }) {
           return user?.id == blog?.blogger_id;
         })
       );
-      console.log(user);
-  },[users]);
+  }, [users]);
 
   const Opencomment = () => {
     setshowComment(true);
@@ -97,19 +91,29 @@ export default function Blog({ blog }) {
     <div>
       <div className=" border my-4 border-black flex justify-between">
         <div className="w-3/4 min-h-40 m-3 flex flex-col">
-          <div className="border-b-2 border-black">{user?.name}</div>
+          <div className="border-b-2 border-black flex items-center">
+            <span className=" bg-green-100 rounded-full w-24 h-24 ">
+              <img
+                src={user?.avatarImg}
+                className="border rounded-full object-cover h-24"
+                alt={user?.name}
+              />
+            </span>
+
+            <span>{user?.name}</span>
+          </div>
           <div>
             <Link to={"/blog/" + blog.id}>
               <div className="text-3xl">{blog.title}</div>
             </Link>
-            {/* <div>{blog.id}</div> */}
-            {/* <div dangerouslySetInnerHTML={{ __html: blog.content }}></div> */}
             <div>Date:{formattedToday}</div>
 
             <div>
               Category:
               {blog.category.map((cat) => (
-                <span className="mx-1" key={cat}>{cat}</span>
+                <span className="mx-1" key={cat}>
+                  {cat}
+                </span>
               ))}
             </div>
             <span className="flex mt-8">
@@ -142,6 +146,7 @@ export default function Blog({ blog }) {
                 className="ml-1"
                 disabled={!sessionStorage.login}
                 onClickHandler={Opencomment}
+                ariaLabel="comment-box"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +179,12 @@ export default function Blog({ blog }) {
         </div>
 
         <div className="m-3">
-          <Img src={blog.blog_img} alt={blog.title} width="380px" />
+          <Img
+            src={blog.blog_img}
+            alt={blog.title}
+            width="300px"
+            height="300px"
+          />
         </div>
       </div>
     </div>

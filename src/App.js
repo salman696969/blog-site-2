@@ -8,9 +8,10 @@ import HomePage from "./components/pages/HomePage/HomePage";
 import AuthPage from "./components/pages/AuthPage/AuthPage";
 import BlogList from "./components/organisms/BlogList/BlogList";
 import AddBlog from "./components/organisms/AddBlog/AddBlog";
-import RequireAuth from "./utils/RequireAuth"
+import RequireAuth from "./utils/RequireAuth";
 import Navbar from "./components/organisms/Navbar/Navbar";
 import BlogPage from "./components/pages/BlogPage/BlogPage";
+import UserSettings from "./components/pages/Settings/UserSettings";
 
 export default function App() {
   return (
@@ -19,12 +20,13 @@ export default function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/" element={<HomePage />}></Route>
-          <Route element={<RequireAuth />}>
-            <Route path="/:id" element={<BlogList />} />
-            <Route path="/blog/:id" element={<BlogPage />} />
-          </Route>
-          {/* <Route path="/allBlogs" element={<BlogList />} /> */}
-        
+        <Route element={<RequireAuth />}>
+          <Route path="/:id" element={<BlogList />} />
+          <Route path="/blog/:id" element={<BlogPage />} />
+          <Route path="/userSettings/:id" element={<UserSettings />} />
+        </Route>
+        {/* <Route path="/allBlogs" element={<BlogList />} /> */}
+
         <Route path="auth" element={<AuthPage />}>
           <Route
             index

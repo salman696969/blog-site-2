@@ -24,7 +24,7 @@ export default function CommentSection(props) {
       let allComments = [];
       allComments = [...allComment, data];
       let res = await fetch(
-        `http://localhost:3000/blog_details/${props.blog.id}`,
+        `http://localhost:3000/blog_details/${props.blog?.id}`,
         {
           method: "PATCH",
           headers: {
@@ -47,7 +47,7 @@ export default function CommentSection(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ comment: [data], id: props.blog.id }),
+        body: JSON.stringify({ comment: [data], id: props.blog?.id }),
       });
       let comment_data = await res.json();
       props.Opencomment();
@@ -89,6 +89,7 @@ export default function CommentSection(props) {
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="medium-modal"
                 onClickHandler={() => props.Closecomment()}
+                ariaLabel={props.blog?.id}
               >
                 <svg
                   aria-hidden="true"

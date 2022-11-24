@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link, Outlet, Route,Routes } from 'react-router-dom'
+import { Link, Outlet, Route,Routes , useParams} from 'react-router-dom'
 import Button from '../../atoms/Button'
 import Login from '../../molecules/Login/Login'
 import Signup from '../../molecules/Signup/Signup'
 import LoginHolder from '../../organisms/LoginHolder/LoginHolder'
 
 export default function AuthPage() {  
+  let {id} = useParams();
+  console.log(id)
   return (
     <div className='flex flex-col items-center'>
       <Link to="/">
@@ -19,7 +21,6 @@ export default function AuthPage() {
             <Button className='m-5'>Signup</Button>
         </Link>
         </div>
-       
         <Outlet/>
     </div>
   )
