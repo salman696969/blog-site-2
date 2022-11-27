@@ -11,7 +11,7 @@ export default function Navbar() {
   let contextAppData = useContext(AppContext);
   let navigate = useNavigate();
   let { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const onClickHandler = () => {
     contextData.setLoggedIn(false);
     sessionStorage.clear();
@@ -28,10 +28,10 @@ export default function Navbar() {
     navigate("/addBlog");
   };
   return (
-    <div className="bg-slate-300 px-10 flex min-w-screen justify-between py-2 font-serif">
+    <div className="bg-black text-white px-10 flex min-w-screen justify-between py-2 font-serif border-b-4 border-white border-opacity-50">
       <div className="">
         <Link to="/allBlogs">
-          <Button bg="inherit" text="black" onClickHandler={showAllBlogs}>
+          <Button bg="inherit" text="inherit" onClickHandler={showAllBlogs}>
             All Blogs
           </Button>
         </Link>
@@ -40,7 +40,7 @@ export default function Navbar() {
           {sessionStorage.getItem("login") ? (
             <Button
               bg="inherit"
-              text="black"
+              text="inherit"
               disabled={!sessionStorage.getItem("login")}
               onClickHandler={showMyBlogs}
             >
@@ -52,7 +52,7 @@ export default function Navbar() {
           {sessionStorage.getItem("login") ? (
             <Button
               bg="inherit"
-              text="black"
+              text="inherit"
               disabled={!sessionStorage.getItem("login")}
               onClickHandler={addBlog}
             >
@@ -68,10 +68,10 @@ export default function Navbar() {
             <Button ariaLabel="settings" className="" bg="inherit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="white"
+                fill=""
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="black"
+                stroke="white"
                 className="w-8 h-8"
               >
                 <path
@@ -89,7 +89,7 @@ export default function Navbar() {
           </Link>
         ) : null}
         {sessionStorage.getItem("login") ? (
-          <Link to="/auth">
+          <Link to="/auth/login">
             <Button
               onClickHandler={() => {
                 onClickHandler();

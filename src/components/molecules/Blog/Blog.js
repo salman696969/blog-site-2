@@ -88,30 +88,32 @@ export default function Blog({ blog }) {
   const formattedToday = dd + "/" + mm + "/" + yyyy;
 
   return (
-    <div>
-      <div className=" border my-4 border-black flex justify-between">
-        <div className="w-3/4 min-h-40 m-3 flex flex-col">
-          <div className="border-b-2 border-black flex items-center">
-            <span className=" bg-green-100 rounded-full w-16 h-16 mr-3">
+    <div className="text-white font-serif pt-1 pl-2">
+      <div className=" border my-4 border-indigo-200 rounded-lg flex justify-between bg-black bg-opacity-20 max-mobile:flex-col">
+        <div className="w-3/4 min-h-40 m-3 flex flex-col max-mobile:w-11/12">
+          <div className="border-b-2 border-indigo-200 flex items-center pb-2">
+            <span className=" bg-green-100 rounded-full w-12 h-12 mr-3">
               <img
                 src={user?.avatarImg}
-                className="border rounded-full object-cover h-16"
+                className="border rounded-full object-cover h-12 w-12"
                 alt={user?.name}
+                width=""
+                height=""
               />
             </span>
 
-            <span>{user?.name}</span>
+            <span className="text-xl">{user?.name}</span>
           </div>
-          <div>
+          <div className="pt-4">
             <Link to={"/blog/" + blog.id}>
-              <div className="text-3xl">{blog.title}</div>
+              <div className="text-2xl uppercase hover:text-indigo-200">{blog.title}</div>
             </Link>
             <div>Date:{formattedToday}</div>
 
             <div>
               Category:
               {blog.category.map((cat) => (
-                <span className="mx-1" key={cat}>
+                <span className="mx-1 text-black bg-white p-1 rounded-md text-sm font-bold" key={cat}>
                   {cat}
                 </span>
               ))}
@@ -129,7 +131,7 @@ export default function Blog({ blog }) {
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
-                    stroke="currentColor"
+                    stroke="white"
                     className="w-8 h-8"
                   >
                     <path
@@ -139,7 +141,7 @@ export default function Blog({ blog }) {
                     />
                   </svg>
                 </span>
-                <span className="text-lg font-bold">{blog.likes.length}</span>
+                <span className="text-lg font-bold text-white">{blog.likes.length}</span>
               </LikeButton>
               <Button
                 bg="inherit"
@@ -150,7 +152,7 @@ export default function Blog({ blog }) {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
+                  fill="white"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="blue"
@@ -177,16 +179,17 @@ export default function Blog({ blog }) {
             ) : null}
           </div>
         </div>
-
-        <div className="m-3">
+        <Link to={"/blog/" + blog.id}>
+        <div className="m-4">
           <Img
             src={blog.blog_img}
             alt={blog.title}
-            width="340px"
-            height="300px"
-            className="h-72"
+            width=""
+            height=""
+            className="w-56 h-56 hover:scale-105 rounded-md transition-all duration-200 max-mobile:w-full"
           />
         </div>
+        </Link>
       </div>
     </div>
   );

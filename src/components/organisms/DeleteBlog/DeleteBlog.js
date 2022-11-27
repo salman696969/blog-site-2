@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllBlogs } from "../../../redux/actions/blogs.action";
+import { getAllBlogs, getMyBlogs } from "../../../redux/actions/blogs.action";
 import Button from "../../atoms/Button";
 
 export default function DeleteBlog({ id }) {
-  console.log(id)
-  let dispatch = useDispatch()
+  // console.log(id)
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
   let userId = sessionStorage.getItem("user-id");
+  let [count, setCount] = useState(true);
+  let [deleteBlog, setDeleteBlog] = useState("");
   const deleteData = async () => {
     let res = await fetch(`http://localhost:3000/blogs/${id}`, {
       method: "DELETE",
@@ -16,12 +20,29 @@ export default function DeleteBlog({ id }) {
       },
     });
     let data = await res.json();
-    console.log(data);
+    toast.success("deleted Successfully");
+    setDeleteBlog("Deleted Successfully");
+    // console.log(data);
   };
-  
+
+  useEffect(() => {
+    console.log(deleteBlog);
+    dispatch(getMyBlogs(userId));
+    dispatch(getAllBlogs(userId));
+  }, [deleteBlog]);
+
+  // useEffect(()=>{
+  //   dispatch(getMyBlogs(userId));
+  // },[userId])
+
   return (
     <div>
-      <Button bg="inherit" onClickHandler={()=>{deleteData()}}>
+      <Button
+        bg="inherit"
+        onClickHandler={() => {
+          deleteData();
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -37,7 +58,6 @@ export default function DeleteBlog({ id }) {
           />
         </svg>
       </Button>
-     
     </div>
   );
 }

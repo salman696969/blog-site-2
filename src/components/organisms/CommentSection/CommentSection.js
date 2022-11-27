@@ -37,9 +37,9 @@ export default function CommentSection(props) {
 
       let comment_data = await res.json();
       props.Opencomment();
-      console.log(comment_data);
+      // console.log(comment_data);
     } else {
-      console.log(allComment);
+      // console.log(allComment);
       let allComment2 = [];
       allComment2.push(data);
       let res = await fetch(`http://localhost:3000/blog_details`, {
@@ -51,7 +51,7 @@ export default function CommentSection(props) {
       });
       let comment_data = await res.json();
       props.Opencomment();
-      console.log(comment_data);
+      // console.log(comment_data);
     }
   };
 
@@ -79,22 +79,23 @@ export default function CommentSection(props) {
         }
       >
         <div class="relative w-full max-w-lg h-full md:h-auto">
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 opacity-95">
-            <div class="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
-              <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+          <div class="relative bg-black rounded-lg shadow dark:bg-gray-900 opacity-100">
+            <div class="flex justify-between items-center p-5 rounded-t border-b dark:border-indigo-200">
+              <h3 class="text-xl font-medium text-white">
                 Comments
               </h3>
               <Button
                 type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                class=" text-gray-400 bg-transparent hover:fill-red-700  rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
                 data-modal-toggle="medium-modal"
                 onClickHandler={() => props.Closecomment()}
                 ariaLabel={props.blog?.id}
+                bg="inherit"
               >
                 <svg
                   aria-hidden="true"
                   class="w-5 h-5"
-                  fill="currentColor"
+                  fill="inherit"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -108,21 +109,21 @@ export default function CommentSection(props) {
               </Button>
             </div>
 
-            <div class="p-6 space-y-6 text-white max-h-96 overflow-y-auto">
+            <div class="p-6 space-y-6 text-black max-h-72 overflow-y-auto">
               {allComment?.map((comment) => {
                 return (
                   <div key={comment.content}>
-                    <span className="mr-2">{comment.username}:</span>
-                    <span>{comment.content}</span>
+                    <span className="mr-2 text-bold text-xl text-white">{comment.username}:</span>
+                    <span className="text-lg text-red-300">{comment.content}</span>
                   </div>
                 );
               })}
             </div>
 
-            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+            <div class="flex items-center p-6 rounded-b border-t border-gray-200 dark:border-indigo-200">
               <TextArea
                 rows="1"
-                className="w-full rounded-lg font-bold min-h-fit py-2 px-1 text-lg"
+                className="w-full rounded-lg font-bold min-h-fit py-1 px-1 text-lg text-black"
                 onChangeHandler={(e) => onChangeHandler(e)}
               ></TextArea>
               <Button

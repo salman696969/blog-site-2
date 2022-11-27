@@ -2,7 +2,7 @@
 import styled from 'styled-components'
   
 const StyledButton = styled.button`
-    color : ${props => props.text? props.text : "white"}  ;
+    color : ${props => props.text? props.text : "black"}  ;
     background-color : ${props => props.bg? props.bg : "#404040"};
     width : fit-content;
     padding : 8px 13px;

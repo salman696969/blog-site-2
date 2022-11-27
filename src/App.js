@@ -12,14 +12,19 @@ import RequireAuth from "./utils/RequireAuth";
 import Navbar from "./components/organisms/Navbar/Navbar";
 import BlogPage from "./components/pages/BlogPage/BlogPage";
 import UserSettings from "./components/pages/Settings/UserSettings";
+import { Toaster } from "react-hot-toast";
+import Navbar1 from "./components/organisms/Navbar/Navbar1";
 
 export default function App() {
   return (
     <React.Fragment>
-      <Navbar></Navbar>
+      <Toaster/>
+      {/* <Navbar></Navbar> */}
+      <Navbar1></Navbar1>
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/blog/:id" element={<BlogPage />} />
         <Route element={<RequireAuth />}>
           <Route path="/:id" element={<BlogList />} />
           <Route path="/blog/:id" element={<BlogPage />} />

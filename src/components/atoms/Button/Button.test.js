@@ -1,9 +1,7 @@
-// import React from "react";
-// import { render } from "@testing-library/react";
+import React from "react";
+import { getByText, render, screen } from "@testing-library/react";
+import Button from "./Button"
 
-
-// test("button atom is rendering", () => {
-//     const { getByText } = render(<button>Submit</button>);
-//     const buttonElement = getByText(/Submit/i);
-//     expect(buttonElement).toBeInTheDocument();
-// });
+test("button atom is rendering", () => {
+    render(<Button onClickHandler="" className="" children="" ariaLabel="" disabled="" bg="" text="" type=""  >Hi</Button>);
+});

@@ -11,35 +11,35 @@ export default function useBase64(file) {
           let reader = new FileReader();
     
           // Convert the file to base64 text
-          console.log(reader)
-          console.log(file)
+          // console.log(reader)
+          // console.log(file)
 reader.readAsDataURL(file[0])
         //   console.log(reader.result)
-        console.log("Called", reader);
+        // console.log("Called", reader);
         //   baseURL = reader.result;
           // on reader load somthing...
           reader.onload = () => {
             // Make a fileInfo Object
-            console.log("Called", reader);
+            // console.log("Called", reader);
             baseURL = reader.result;
-            console.log(baseURL);
+            // console.log(baseURL);
             resolve(baseURL);
           };
-          console.log(fileInfo);
+          // console.log(fileInfo);
         });
       };
     useEffect(()=>{
-      console.log(file)
+      // console.log(file)
       getBase64(file)
         .then(result => {
           file["base64"] = result;
-          console.log("File Is", file);
+          // console.log("File Is", file);
           setBase64URL( file )
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
         });
-        console.log(base64URL)
+        // console.log(base64URL)
     },[file])
   return (
     base64URL

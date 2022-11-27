@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ImageContext from "../../../context/ImageContext";
@@ -22,9 +23,9 @@ export default function UserSettings() {
   let [email, setEmail] = useState();
   let [password, setPassword] = useState();
   let [avatar, setAvatar] = useState();
-
+  let [validatePassword, setValidatePassword] = useState(true);
   useEffect(() => {
-    console.log(featuredImage);
+    // console.log(featuredImage);
   }, [featuredImage]);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function UserSettings() {
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       setImageUrl(reader.result);
       setAvatar(reader.result); //base64encoded string
     };
@@ -53,30 +54,52 @@ export default function UserSettings() {
   };
 
   const updateUserData = async () => {
-    let res = await fetch(`http://localhost:3000/users/${user?.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-        avatarImg: avatar,
-      }),
-    });
-    let data = await res.json();
-    console.log(data);
-    alert(data);
+    if (name == "") {
+      toast.error("Cannot Keep Name Empty");
+    } else {
+      let emailresponse = await fetch(
+        `http://localhost:3000/users?email=${email}`,
+        {
+          method: "GET",
+          headers: { "Content-type": "Application/json" },
+        }
+      );
+      let user_exist = await emailresponse.json();
+      // console.log(user_exist[0].email)
+      if (user_exist.length == 0 || user_exist[0].email == user?.email) {
+        let res = await fetch(`http://localhost:3000/users/${user?.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            avatarImg: avatar,
+          }),
+        });
+        let data = await res.json();
+        // console.log(data);
+        toast.success("Details Updated");
+      } else {
+        toast.error("User with same email exist");
+      }
+    }
   };
 
   return (
     <div>
-      <Form className="flex flex-col" onSubmitHandler={() => updateUserData()}>
-        <Label HTMLfor="name">name</Label>
+      <Form
+        className="flex flex-col pt-24 text-white max-w-4xl p-14"
+        onSubmitHandler={() => updateUserData()}
+      >
+        <Label HTMLfor="name" className="text-3xl">
+          Name
+        </Label>
         <Input
-          required={true}
-          className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
+          // required={true}
+          className="mb-2 focus:outline-none focus:bg-slate-200 py-1 bg-inherit border-b-2 border-b-indigo-200 focus:bg-opacity-0 focus:border-b-4 text-xl"
           name="name"
           onChangeHandler={(e) => {
             setName(e.target.value);
@@ -84,19 +107,19 @@ export default function UserSettings() {
           type="text"
           value={name}
         />
-        <Label>username</Label>
+        <Label className="text-3xl">Username</Label>
         <Input
           //   required={true}
           disabled={true}
-          className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
+          className="mb-2 focus:outline-none focus:bg-slate-200 py-1 bg-inherit border-b-2 border-b-indigo-200 focus:bg-opacity-0 focus:border-b-4 text-xl"
           name="username"
           value={user?.username}
           type="text"
         />
-        <Label>email</Label>
+        <Label className="text-3xl">Email</Label>
         <Input
           required={true}
-          className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
+          className="mb-2 focus:outline-none focus:bg-slate-200 py-1 bg-inherit border-b-2 border-b-indigo-200 focus:bg-opacity-0 focus:border-b-4 text-xl"
           name="email"
           onChangeHandler={(e) => {
             setEmail(e.target.value);
@@ -104,18 +127,18 @@ export default function UserSettings() {
           value={email}
           type="email"
         />
-        <Label>Profile Picture</Label>
+        <Label className="text-3xl">Profile Picture</Label>
         <input
           accept="image/*"
           id="button-file"
           type="file"
           onChange={convert}
         />
-        <Img src={avatar} height="100px" width="100px"/>
-        <Label>password</Label>
+        <Img src={avatar} height="100px" width="100px" className="mt-2 mb-2" />
+        <Label className="text-3xl">Password</Label>
         <Input
           required={true}
-          className="border border-white border-b-black focus:outline-none focus:bg-slate-200 my-3"
+          className="mb-2 focus:outline-none focus:bg-slate-200 py-1 bg-inherit border-b-2 border-b-indigo-200 focus:bg-opacity-0 focus:border-b-4 text-xl"
           name="password"
           onChangeHandler={(e) => {
             setPassword(e.target.value);
@@ -124,8 +147,12 @@ export default function UserSettings() {
           value={password}
         />
 
-        <Button disabled={false} className="bg-black text-white my-3">
-          Update Blog
+        <Button
+        bg="white"
+          disabled={false}
+          className="my-3 text-md font-bold bg-white text-black px-6 rounded-md py-1 hover:bg-green-500 hover:-translate-y-2 transition-all duration-200"
+        >
+          Update User
         </Button>
       </Form>
     </div>

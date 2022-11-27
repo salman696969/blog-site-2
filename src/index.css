@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body{
+    background-image: url("/src/images/bg-image.jpeg");
+    background-size: cover ;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: center;
+    background-attachment: fixed;
+    /* opacity: 0.2; */
+}

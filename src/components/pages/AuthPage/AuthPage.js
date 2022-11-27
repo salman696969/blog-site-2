@@ -7,19 +7,16 @@ import LoginHolder from '../../organisms/LoginHolder/LoginHolder'
 
 export default function AuthPage() {  
   let {id} = useParams();
-  console.log(id)
+  // console.log(id)
   return (
-    <div className='flex flex-col items-center'>
-      <Link to="/">
-        <Button bg="inherit" text="black" className='mt-10'>Home</Button>
-      </Link> 
+    <div className='flex flex-col items-center  h-screen'>
         <div>
-        <Link to="login">
+        {/* <Link to="login">
             <Button className='m-5'>Login</Button>
         </Link>
         <Link to="signup">
             <Button className='m-5'>Signup</Button>
-        </Link>
+        </Link> */}
         </div>
         <Outlet/>
     </div>

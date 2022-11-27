@@ -15,7 +15,7 @@ export default function HomePage() {
     dispatch(getAllBlogs(id,userId))
 },[id])
   let contextData= useContext(AuthContext)
-  console.log(contextData.loggedIn)
+  // console.log(contextData.loggedIn)
   return (
     <div>
       <BlogList/>
